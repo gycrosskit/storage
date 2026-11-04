@@ -1,0 +1,10 @@
+# GYC_STORAGE_PACKAGE_DIR 必须来自本轮解包的 HAR/ohpm 包，不搜索旧源码。
+if(NOT DEFINED GYC_STORAGE_PACKAGE_DIR)
+    message(FATAL_ERROR "GYC_STORAGE_PACKAGE_DIR is required")
+endif()
+set(GYC_STORAGE_HEADER_DIR "${GYC_STORAGE_PACKAGE_DIR}/src/main/resources/rawfile/native")
+if(NOT EXISTS "${GYC_STORAGE_HEADER_DIR}/gyc_storage_bridge.h")
+    message(FATAL_ERROR "The installed storage HAR is missing its native bridge header")
+endif()
+target_include_directories(kuikly_napi PRIVATE "${GYC_STORAGE_HEADER_DIR}")
+target_compile_features(kuikly_napi PRIVATE cxx_std_17)

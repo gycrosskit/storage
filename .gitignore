@@ -1,0 +1,16 @@
+.gradle/
+.kotlin/
+**/build/
+local.properties
+**/oh_modules/
+**/.hvigor/
+.DS_Store
+**/BuildProfile.ets
+**/oh-package-lock.json5
+/scripts/ci-changes.py
+/scripts/ci-run.py
+/scripts/ci-native-cache.py
+
+.build/
+.swiftpm/
+Package.resolved
