@@ -1,0 +1,4 @@
+{
+  "name": "storage-consumer", "version": "0.1.0-rc.1", "main": "Index.ets",
+  "dependencies": { "@gycrosskit/storage-native": "0.1.0-rc.1" }
+}
