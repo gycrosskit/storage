@@ -17,7 +17,7 @@ implementation("com.github.gycrosskit.storage:storage-core:0.1.0-rc.1")
 implementation("com.github.gycrosskit.storage:storage-mmkv:0.1.0-rc.1")
 ```
 
-Maven 仓库为 `https://jitpack.io`，仅精确版本依赖。iOS CocoaPods：`pod 'GycStorage', '0.1.0-rc.1'`；SPM：本仓库精确版本、产品 `GycStorage`。OHPM：`@gycrosskit/storage-native` 精确版本 `0.1.0-rc.1`。声明坐标不代表渠道已就绪。
+Maven 仓库为 `https://jitpack.io`，仅精确版本依赖。iOS CocoaPods：`pod 'GycStorage', :git => 'https://github.com/gycrosskit/storage.git', :tag => 'native-0.1.0-rc.1'`（未发布到 Specs）；SPM：本仓库精确版本、产品 `GycStorage`。OHPM：`@gycrosskit/storage-native` 精确版本 `0.1.0-rc.1`。声明坐标不代表渠道已就绪。
 
 ```kotlin
 val native = AndroidMmkvStorage(context)
