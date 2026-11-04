@@ -5,7 +5,7 @@ plugins {
 }
 allprojects {
     group = "com.github.gycrosskit.storage"
-    version = providers.environmentVariable("VERSION").orElse("0.1.0-rc.1").get()
+    version = providers.environmentVariable("VERSION").orElse("1.0.0").get()
 }
 subprojects {
     plugins.withId("maven-publish") {

@@ -1,6 +1,6 @@
 # GY CrossKit Storage
 
-通用键值存储组件，迁自 sxmqliveAndroid `c768cb12c` 的 storage-core、storage-mmkv 及原生 MMKV 驱动。业务 Key、账号、Json 默认值、清理时机、目录和应用级实例由宿主持有。当前 `0.1.0-rc.1` 为源码候选，公开渠道状态以实际发布回执为准。
+通用键值存储组件，迁自 sxmqliveAndroid `c768cb12c` 的 storage-core、storage-mmkv 及原生 MMKV 驱动。业务 Key、账号、Json 默认值、清理时机、目录和应用级实例由宿主持有。首个正式版本 `1.0.0` 待发布，公开渠道状态以实际发布回执为准。
 
 | 产品 | 职责 | 平台与入口 |
 | --- | --- | --- |
@@ -12,12 +12,12 @@
 没有 UI/Renderer 产品。KMP iOS 通过宿主薄 adapter 使用 Swift 驱动；OHOS Kotlin 边界为 `OhosNativeStorageModule`。Kotlin 包暂保留 `com.dgtang.live.data.local`，避免迁移同时改变调用方 API。
 
 ```kotlin
-implementation("com.github.gycrosskit.storage:storage-core:0.1.0-rc.1")
+implementation("com.github.gycrosskit.storage:storage-core:1.0.0")
 // Android source set
-implementation("com.github.gycrosskit.storage:storage-mmkv:0.1.0-rc.1")
+implementation("com.github.gycrosskit.storage:storage-mmkv:1.0.0")
 ```
 
-Maven 仓库为 `https://jitpack.io`，仅精确版本依赖。iOS CocoaPods：`pod 'GycStorage', :git => 'https://github.com/gycrosskit/storage.git', :tag => 'native-0.1.0-rc.1'`（未发布到 Specs）；SPM：本仓库精确版本、产品 `GycStorage`。OHPM：`@gycrosskit/storage-native` 精确版本 `0.1.0-rc.1`。声明坐标不代表渠道已就绪。
+Maven 仓库为 `https://jitpack.io`，仅精确版本依赖。iOS CocoaPods：`pod 'GycStorage', :git => 'https://github.com/gycrosskit/storage.git', :tag => 'native-1.0.0'`（未发布到 Specs）；SPM：本仓库精确版本 `1.0.0`、产品 `GycStorage`。OHPM：`@gycrosskit/storage-native` 精确版本 `1.0.0`。声明坐标不代表渠道已就绪。
 
 ```kotlin
 val native = AndroidMmkvStorage(context)

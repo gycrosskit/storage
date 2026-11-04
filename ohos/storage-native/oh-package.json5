@@ -1,5 +1,5 @@
 {
-  "name": "@gycrosskit/storage-native", "version": "0.1.0-rc.1",
+  "name": "@gycrosskit/storage-native", "version": "1.0.0",
   "description": "保留 MMKV UTF-8 bytes 格式的应用级原生存储",
   "main": "Index.ets", "author": { "name": "gycrosskit", "url": "https://github.com/gycrosskit" },
   "repository": "https://github.com/gycrosskit/storage", "license": "Apache-2.0",

@@ -1,11 +1,11 @@
 # @gycrosskit/storage-native
 
-`0.1.0-rc.1` 是源码候选，提供纯 ArkTS MMKV 驱动和 C++17 桥头文件；发布与消费状态以对应渠道回执为准。
+首个正式版本 `1.0.0` 待发布，提供纯 ArkTS MMKV 驱动和 C++17 桥头文件；发布与消费状态以对应渠道回执为准。
 
-发布后按精确版本安装；当前候选尚未发布：
+发布后按精确版本安装；当前版本尚未发布：
 
 ```sh
-ohpm install @gycrosskit/storage-native@0.1.0-rc.1
+ohpm install @gycrosskit/storage-native@1.0.0
 ```
 
 宿主以应用级实例持有 `NativeMmkvStorage`，显式注入原 `filesDir/mmkv` 与 `cacheDir`。安装函数由宿主提供，组件不依赖 Shared、Renderer 或宿主专用符号。桥头文件随包位于 `src/main/resources/rawfile/native/gyc_storage_bridge.h`。

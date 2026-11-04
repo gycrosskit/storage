@@ -4,7 +4,7 @@ plugins {
     kotlin("multiplatform") version "2.2.21-1.0.0"
     id("com.android.library") version "8.10.1"
 }
-val storageVersion = providers.gradleProperty("storageVersion").orElse("0.1.0-rc.1").get()
+val storageVersion = providers.gradleProperty("storageVersion").orElse("1.0.0").get()
 kotlin {
     androidTarget { compilerOptions { jvmTarget.set(JvmTarget.JVM_11) } }; iosArm64(); iosX64(); iosSimulatorArm64(); ohosArm64(); jvm { compilerOptions { jvmTarget.set(JvmTarget.JVM_11) } }
     sourceSets {

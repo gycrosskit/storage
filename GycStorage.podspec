@@ -1,6 +1,6 @@
 Pod::Spec.new do |spec|
   spec.name = 'GycStorage'
-  spec.version = '0.1.0-rc.1'
+  spec.version = '1.0.0'
   spec.summary = '保留 MMKV UTF-8 bytes 格式的原生键值存储'
   spec.homepage = 'https://github.com/gycrosskit/storage'
   spec.license = { :type => 'Apache-2.0', :file => 'LICENSE' }
