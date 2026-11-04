@@ -1,1 +1,2 @@
 # 发布冻结时由已验证 Maven 归档登记 SHA-256；未登记版本拒绝 JitPack 安装。
+0.1.0-rc.1 3ad5cf53865fcba6b6e1ffa0efb027e7e13ce53038131597722faef6949aec9f
