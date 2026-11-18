@@ -1,5 +1,7 @@
 # GY CrossKit Storage
 
+新版 Maven 发布由 Jenkins 生成同版本归档、`source-receipt.json` 和 `SHA256SUMS`。JitPack 核对标签来源、归档尺寸和摘要后安装同一份制品。历史发布按原版本 Tag 复验。
+
 通用键值存储组件，迁自 sxmqliveAndroid `c768cb12c` 的 storage-core、storage-mmkv 及原生 MMKV 驱动。业务 Key、账号、Json 默认值、清理时机、目录和应用级实例由宿主持有。正式版本 `1.0.0` 已发布；Maven、Git Pod、SPM、HAR 和私有 OHPM 的精确版本消费已通过，宿主旧数据兼容与设备行为仍须另验。
 
 | 产品 | 职责 | 平台与入口 |
@@ -17,7 +19,7 @@ implementation("com.github.gycrosskit.storage:storage-core:1.0.0")
 implementation("com.github.gycrosskit.storage:storage-mmkv:1.0.0")
 ```
 
-Maven 仓库为 `https://jitpack.io`，仅精确版本依赖，[1.0.0 Release](https://github.com/gycrosskit/storage/releases/tag/1.0.0)已发布。iOS CocoaPods：`pod 'GycStorage', :git => 'https://github.com/gycrosskit/storage.git', :tag => 'native-1.0.0'`（[Git Tag](https://github.com/gycrosskit/storage/tree/native-1.0.0)已发布，未发布到 Specs）；SPM：本仓库已发布的精确 `1.0.0` Tag、产品 `GycStorage`。HAR 见 [har-1.0.0 Release](https://github.com/gycrosskit/storage/releases/tag/har-1.0.0)；OHPM 私有 Registry 已发布 `@gycrosskit/storage-native@1.0.0`，安装需宿主配置对应 scope 与认证，不代表官方 Registry 上架。各渠道发布、安装与完整消费分别验收。
+Maven 仓库为 `https://jitpack.io`，仅精确版本依赖，[1.0.0 Release](https://github.com/gycrosskit/storage/releases/tag/1.0.0)已发布。iOS CocoaPods：`pod 'GycStorage', :git => 'https://github.com/gycrosskit/storage.git', :tag => 'native-1.0.0'`（[Git Tag](https://github.com/gycrosskit/storage/tree/native-1.0.0)已发布，未发布到 Specs）；SPM：本仓库已发布的精确 `1.0.0` Tag、产品 `GycStorage`。OHPM 私有 Registry 已发布 `@gycrosskit/storage-native@1.0.0`，安装需宿主配置对应 scope 与认证，不代表官方 Registry 上架。各渠道发布、安装与完整消费分别验收。
 
 ```kotlin
 val native = AndroidMmkvStorage(context)
