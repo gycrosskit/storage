@@ -12,6 +12,6 @@ ohpm install @gycrosskit/storage-native@1.0.0
 
 完整合同与接线以仓库的[功能与平台差异](https://github.com/gycrosskit/storage/blob/main/docs/功能与平台差异.md)、[接入指南](https://github.com/gycrosskit/storage/blob/main/docs/接入指南.md)和[开发与验证](https://github.com/gycrosskit/storage/blob/main/docs/开发与验证.md)为准。
 
-发布前遵循公共 [HAR 发布与消费检查点](https://github.com/gycrosskit/.github/blob/main/docs/发布流程.md#har-发布与消费检查点)。
+私有 OHPM 发布与消费验收遵循[组件发布流程](https://github.com/gycrosskit/.github/blob/main/docs/发布流程.md)。
 
 Apache-2.0，见 [LICENSE](LICENSE)；官方 MMKV 的许可证由其依赖包提供。
