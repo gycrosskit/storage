@@ -30,6 +30,7 @@ val typed = TypedKeyValueStore(values)
 
 MMKV 固定 2.4.3。iOS 最低 14；Android 最低 24、compileSdk 36；OHOS 工具链沿用 API22/6.0.2。SPM 的上游 MMKV manifest 需 Swift 6.2，组件没有升级宿主工具链。
 
+- [AOCI 索引](aoci.txt)：实现职责、依赖和跨端桥接关系。
 - [接入指南](docs/接入指南.md)：目录、实例、Swift adapter 与 OHOS NAPI 接线。
 - [功能与平台差异](docs/功能与平台差异.md)：唯一功能合同及兼容范围。
 - [开发与验证](docs/开发与验证.md)：轻量回归、SDK/消费目标与发布输入。
