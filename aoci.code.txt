@@ -1,0 +1,152 @@
+#AOCI-CODE-VOLUME: 1
+
+===/Users/guoyang/.codex/worktrees/aoci-storage/storage/===
+.gitattributes[FC4T]: F:约束文本为 LF 检出以稳定跨平台 AOCI 原始字节指纹 | R:- | A:- | S:-
+.gitignore[FC4T]: F:隔离 Gradle、Swift、OHOS 缓存及本机连接配置 | R:- | A:- | S:仅 Git 忽略不能替代 AOCI 的机器路径 Scope 排除
+AGENTS.md[SW7S]: F:约束组件存储兼容、受控验证和 AOCI 认知维护 | R:code:docs/功能与平台差异.md | A:- | S:旧 StoreID、UTF-8 bytes、同实例锁与保留值不可因迁移改变
+GycStorage.podspec[FV7T]: F:声明原生 Swift 存储 Pod、native 精确 Tag 和 MMKV 依赖 | R:code:ios/Sources/GycStorage/GycMmkvStorage.swift | A:GycStorage | S:依赖官方 MMKV 2.4.3，原生产品不嵌 Shared 或第二套 Kotlin runtime
+LICENSE[SG3M]: F:声明 Apache 2.0 授权、分发义务与免责声明 | R:- | A:- | S:-
+Package.swift[FV7T]: F:发布 iOS 14 起的 GycStorage Swift 产品并固定 MMKV 2.4.3 | R:code:ios/Sources/GycStorage/GycMmkvStorage.swift | A:GycStorage | S:本 manifest 为 Swift 5.9，上游依赖 manifest 的实际工具链要求另验
+README.md[SD7T]: F:提供KMP与原生存储产品、正式安装和最小用法并链接AOCI与平台合同 | R:code:docs/接入指南.md,code:docs/功能与平台差异.md | A:- | S:业务Key、账号、目录与清理时机由宿主持有，已发布消费不代验旧数据升级
+build.gradle.kts[FV6T]: F:配置 KMP 插件、统一 storage 版本和 Maven 许可证 | R:code:storage-core/build.gradle.kts,code:storage-mmkv/build.gradle.kts | A:- | S:VERSION 缺省为 1.0.0，原生包与 Maven 分别验收
+gradle.properties[FV4T]: F:设置 Gradle 堆、AndroidX 与禁用目标处理 | R:- | A:- | S:-
+gradlew[EV4S]: F:解析 Unix Java 环境并转发参数给 Gradle Wrapper | R:code:gradle/wrapper/gradle-wrapper.properties | A:- | S:-
+gradlew.bat[EV4T]: F:解析 Windows Java 环境并转发 Gradle 参数及退出状态 | R:code:gradle/wrapper/gradle-wrapper.properties | A:- | S:-
+jitpack-install.sh[OV8T]: F:验证受管 Release 来源收据、归档摘要和解包边界后安装 Maven 字节 | R:code:tests/test_jitpack_install.py | A:- | S:收据必须绑定当前 HEAD SHA/tree，拒绝重复字段、软链、越界和过量解包
+jitpack.yml[FV5T]: F:选择 JDK 21 并调用 storage 冻结归档安装入口 | R:code:jitpack-install.sh | A:- | S:-
+settings.gradle.kts[FV6T]: F:声明插件与依赖镜像并注册 core 和 mmkv 两个 Gradle 模块 | R:code:storage-core/build.gradle.kts,code:storage-mmkv/build.gradle.kts | A:- | S:Kuikly 独占腾讯仓读取完整 module，避免仅 POM 镜像回落错误根 JAR
+
+===/Users/guoyang/.codex/worktrees/aoci-storage/storage/docs/===
+功能与平台差异.md[SD8T]: F:规定 UTF-8 bytes、缺失与失败、原子更新及三端存储差异 | R:code:storage-core/src/commonMain/kotlin/com/dgtang/live/data/local/NativeKeyValueStore.kt | A:- | S:仅 Android 对非法 UTF-8 回退旧字符串解码；其他端失败，不能擅自回写
+开发与验证.md[SV7T]: F:定义轻量替身、SDK、独立消费及各渠道冻结发布的验收入口 | R:code:scripts/archive-prebuilt.sh,code:verification/ios/run.sh | A:- | S:Node 与 Swift 替身不能代替真实 MMKV SDK、HAR 或设备数据升级
+接入指南.md[SD8T]: F:说明应用级StoreID与目录装配、Swift adapter及OHOS TSFN接线，安装坐标集中到README | R:code:README.md,code:ios/Sources/GycStorage/GycStorageModule.swift,code:ohos/storage-native/src/main/ets/NativeMmkvStorage.ets | A:- | S:同物理Store只装配一个Kotlin实例；主线程不得同步等待发起请求的后台任务
+
+===/Users/guoyang/.codex/worktrees/aoci-storage/storage/gradle/===
+native-toolchain.properties[FV6T]: F:固定 Kotlin Native 版本、目标集合与工具链 revision | R:code:storage-core/build.gradle.kts | A:- | S:工具链身份包含 revision，不能只核对 Kotlin 字符串
+
+===/Users/guoyang/.codex/worktrees/aoci-storage/storage/gradle/wrapper/===
+gradle-wrapper.properties[FV5T]: F:固定 Gradle 8.11.1 分发下载与缓存位置 | R:code:gradlew,code:gradlew.bat | A:- | S:-
+
+===/Users/guoyang/.codex/worktrees/aoci-storage/storage/ios/Sources/GycStorage/===
+GycMmkvStorage.swift[PD9T]: F:以官方 MMKV 实现应用级 UTF-8 bytes 读写、差集删除与清空 | R:code:ios/Sources/GycStorage/GycStorageModule.swift | A:GycMmkvStorage | S:缺失与解码失败分别返回；NSLock 只保护 Store 缓存，业务原子读改写仍由 Kotlin 实例锁负责；保留值不先清空重写
+GycStorageModule.swift[LD7T]: F:声明原生读取成功标志与五个存储操作的 Swift 协议 | R:code:ios/Sources/GycStorage/GycMmkvStorage.swift | A:GycStorageRead,GycStorageModule | S:successful=true 且 value=nil 只表示缺失，失败不能转作默认初始化
+
+===/Users/guoyang/.codex/worktrees/aoci-storage/storage/ohos/AppScope/===
+app.json5[FV4T]: F:声明 OHOS 存储产品包名、版本与图标标签引用 | R:code:ohos/build-profile.json5 | A:- | S:-
+
+===/Users/guoyang/.codex/worktrees/aoci-storage/storage/ohos/===
+build-profile.json5[FV6T]: F:为 StorageNative 登记 HarmonyOS API 22 产品与模块目标 | R:code:ohos/storage-native/build-profile.json5 | A:- | S:target 与 compatible 均为 6.0.2(22)
+hvigorfile.ts[EV5T]: F:将 OHOS 工程绑定到官方 appTasks 构建系统 | R:code:ohos/build-profile.json5 | A:- | S:-
+oh-package.json5[FV4T]: F:声明 OHOS 根工程模型与包描述 | R:code:ohos/storage-native/oh-package.json5 | A:- | S:-
+
+===/Users/guoyang/.codex/worktrees/aoci-storage/storage/ohos/hvigor/===
+hvigor-config.json5[FV4T]: F:固定 Hvigor 模型版本并保留执行与日志配置入口 | R:code:ohos/hvigorfile.ts | A:- | S:-
+
+===/Users/guoyang/.codex/worktrees/aoci-storage/storage/ohos/storage-native/===
+CHANGELOG.md[SD4T]: F:记录原生存储首版能力、旧格式兼容与桥接边界 | R:code:ohos/storage-native/README.md | A:- | S:其中待发布描述为历史记录，当前渠道状态需核对根 README
+Index.ets[ED5T]: F:公开 NativeMmkvStorage 作为原生 HAR 的唯一 ArkTS 入口 | R:code:ohos/storage-native/src/main/ets/NativeMmkvStorage.ets | A:NativeMmkvStorage | S:-
+LICENSE[SG3M]: F:随 HAR 分发 Apache 2.0 授权与免责条款 | R:code:LICENSE | A:- | S:-
+README.md[SD6T]: F:说明纯 ArkTS 存储安装、应用级 owner 及包内桥接头文件 | R:code:docs/接入指南.md | A:- | S:内含待发布历史表述，当前渠道状态应核对根 README 与发布回执
+build-profile.json5[FV5T]: F:为原生 HAR 声明 stageMode 和 HarmonyOS 默认目标 | R:code:ohos/build-profile.json5 | A:- | S:-
+hvigorfile.ts[EV5T]: F:使用官方 harTasks 构建原生 StorageNative 模块 | R:code:ohos/storage-native/build-profile.json5 | A:- | S:-
+oh-package.json5[FV7T]: F:声明 storage-native 1.0.0 公开入口及精确 MMKV 依赖 | R:code:ohos/storage-native/Index.ets | A:- | S:官方 MMKV 固定 2.4.3，不能将私有 OHPM 分发描述为官方 Registry 上架
+
+===/Users/guoyang/.codex/worktrees/aoci-storage/storage/ohos/storage-native/src/main/ets/===
+NativeMmkvStorage.ets[PD9T]: F:把同步 JSON 存储请求分派到缓存的 MMKV 实例并保持 UTF-8 bytes | R:code:ohos/storage-native/src/main/resources/rawfile/native/gyc_storage_bridge.h | A:NativeMmkvStorage.initialize,NativeMmkvStorage.invoke | S:StoreID 限小写字母开头；缺失与解码失败分开；删除后核对，保留值不清空重写；异常不输出业务 Key 或值
+
+===/Users/guoyang/.codex/worktrees/aoci-storage/storage/ohos/storage-native/src/main/===
+module.json5[FV4T]: F:声明 StorageNative 为支持默认设备和平板的 HAR 模块 | R:code:ohos/storage-native/build-profile.json5 | A:- | S:-
+
+===/Users/guoyang/.codex/worktrees/aoci-storage/storage/ohos/storage-native/src/main/resources/rawfile/native/===
+gyc_storage_bridge.h[ID9S]: F:提供进程级 C++17 NAPI 分派桥，主线程直调而后台经 TSFN 同步等待 | R:code:storage-core/src/ohosArm64Main/kotlin/com/dgtang/live/data/local/OhosNativeStorageModule.kt | A:GycStorageDispatcher,GycStorageInstaller,GycStorageInstall | S:安装一次且由宿主注入安装函数；输出 strdup 内存由 Kotlin free；ArkTS 主线程不能阻塞等待发起请求的后台任务；JS 异常清除后返回失败
+
+===/Users/guoyang/.codex/worktrees/aoci-storage/storage/scripts/===
+archive-prebuilt.sh[OV7T]: F:冻结完整九个 Maven publication、校验变体并输出归档及摘要 | R:code:scripts/check-maven.py,code:scripts/jitpack-metadata.py | A:- | S:已有 staging 或归档包括软链均拒绝，不清理旧候选；JVM 字节码上限 55
+build.sh[EV7T]: F:分派三端生产编译、原生 Swift Pod 编译与 Maven 或 HAR 打包 | R:code:scripts/archive-prebuilt.sh,code:GycStorage.podspec | A:- | S:iOS 仅 xcodebuild build 且禁签名；Harmony compile 后构建生产 HAR，不串联测试或消费
+check-maven.py[OV8S]: F:校验完整 publication、许可证、sidecar、变体引用与产物字节码 | R:code:scripts/archive-prebuilt.sh | A:check_sidecars,check_jvm_bytecode,resolve_artifact | S:SNAPSHOT 按当前 metadata 解析；摘要可缓存但每个 variant 声明仍核验，Android 内嵌 JAR 也检查
+check-public-maven.py[OV8M]: F:核对公开 JitPack 精确 Tag、源码 SHA、publication 和真实下载字节 | R:code:scripts/check-maven.py | A:audit,ready_state,validate_state,validate_component,check_sidecars | S:只轮询明确未就绪状态；身份或清单错立即失败；SHA256/512 sidecar 的 404 单独记录为缺失，不当通过；精确 POM 请求可触发尚未创建的构建
+ci-pin-fork-host.sh[OV6S]: F:在临时 GitHub runner 复用已通过原域名 HTTPS 探测的 Maven 地址 | R:code:settings.gradle.kts | A:- | S:仅 GitHub hosted Linux/macOS 可写 hosts；公共 IP 和证书、200、实际地址须匹配，探测失败继续普通解析
+jitpack-metadata.py[OV7T]: F:正规化 classifier 相关变体并重算已有 module sidecar | R:code:scripts/archive-prebuilt.sh | A:normalize | S:先验证全部输入再写入，非空资源不能被删除来伪造发布兼容
+
+===/Users/guoyang/.codex/worktrees/aoci-storage/storage/storage-core/===
+build.gradle.kts[FV7T]: F:构建 storage-core 的 Android、JVM、iOS、OHOS 变体与 staging 发布 | R:code:build.gradle.kts | A:- | S:serialization Json 是公开 api，JVM 与 Android 字节码均保持 11
+
+===/Users/guoyang/.codex/worktrees/aoci-storage/storage/storage-core/src/commonMain/kotlin/com/dgtang/live/data/local/===
+KeyValueStore.kt[LD8T]: F:定义跨端字符串读取、写入、原子更新与按集合清理契约 | R:code:storage-core/src/commonMain/kotlin/com/dgtang/live/data/local/NativeKeyValueStore.kt | A:KeyValueStore | S:缺失读取返回空字符串；removeAllExcept 保留值不经清空与重写
+NativeKeyValueStore.kt[PD9T]: F:以单实例协程写锁实现原生 Store 的读写和读改写原子性 | R:code:storage-core/src/commonMain/kotlin/com/dgtang/live/data/local/NativeStorageModule.kt | A:NativeKeyValueStore | S:锁只覆盖当前实例，不能承诺跨实例或跨进程事务；读失败必须传播以防覆盖未读数据
+NativeStorageModule.kt[LD8T]: F:声明同步原生存储操作与区分缺失、读取失败的结果 | R:code:ios/Sources/GycStorage/GycStorageModule.swift,code:ohos/storage-native/src/main/ets/NativeMmkvStorage.ets | A:NativeStorageRead,NativeStorageModule,readString | S:readString 只有成功且缺失才返回 null，失败直接抛出
+TypedKeyValueStore.kt[PD9T]: F:在字符串存储上提供泛型 JSON 编解码及可区分的读取结果与失败回调 | R:code:storage-core/src/commonMain/kotlin/com/dgtang/live/data/local/KeyValueStore.kt | A:StorageRead,StorageFailureReason,TypedKeyValueStore | S:默认值不回写；读失败阻止 update，已读取的损坏数据才用默认；取消继续传播，普通观察异常不改变结果
+
+===/Users/guoyang/.codex/worktrees/aoci-storage/storage/storage-core/src/commonTest/kotlin/com/dgtang/live/data/local/===
+NativeKeyValueStoreTest.kt[TD8T]: F:验证同实例并发更新、Store 隔离及原生失败不覆盖原值 | R:code:storage-core/src/commonMain/kotlin/com/dgtang/live/data/local/NativeKeyValueStore.kt | A:NativeKeyValueStoreTest,TestNativeStorage | S:使用替身不证明真实 MMKV 文件兼容或跨进程事务
+TypedKeyValueStoreTest.kt[TD8T]: F:验证类型往返、缺失与损坏、IO 失败保护及取消传播 | R:code:storage-core/src/commonMain/kotlin/com/dgtang/live/data/local/TypedKeyValueStore.kt | A:TypedKeyValueStoreTest | S:显式 null 与缺失分开，读取失败的更新不能覆盖旧值，默认值不能回写
+
+===/Users/guoyang/.codex/worktrees/aoci-storage/storage/storage-core/src/ohosArm64Main/kotlin/com/dgtang/live/data/local/===
+OhosNativeStorageModule.kt[ID9T]: F:将 Kotlin 存储操作编码为 JSON 并调用一次安装的原生同步分派器 | R:code:ohos/storage-native/src/main/resources/rawfile/native/gyc_storage_bridge.h,code:ohos/storage-native/src/main/ets/NativeMmkvStorage.ets | A:OhosNativeStorageModule | S:未安装或重复安装即失败；响应必须 ok=true；原生返回串在解析 finally 中 free
+
+===/Users/guoyang/.codex/worktrees/aoci-storage/storage/storage-mmkv/===
+build.gradle.kts[FV7T]: F:构建仅 Android 的 MMKV adapter，向消费者公开 storage-core | R:code:storage-core/build.gradle.kts | A:- | S:MMKV 2.4.3 为内部依赖；Robolectric 启用资源但不能代验真实 SDK
+
+===/Users/guoyang/.codex/worktrees/aoci-storage/storage/storage-mmkv/src/androidMain/kotlin/com/dgtang/live/data/local/===
+AndroidMmkvStorage.kt[PD9T]: F:使用应用 Context 的官方 MMKV 保持 UTF-8 bytes 编码并验证删除结果 | R:code:storage-core/src/commonMain/kotlin/com/dgtang/live/data/local/NativeStorageModule.kt | A:AndroidMmkvStorage | S:非法 UTF-8 才回退 decodeString；存在但读不出为失败；removeAllExcept 只删差集，目录和 StoreID 保持旧合同
+
+===/Users/guoyang/.codex/worktrees/aoci-storage/storage/storage-mmkv/src/androidUnitTest/kotlin/com/dgtang/live/data/local/===
+AndroidMmkvStorageTest.kt[TD8T]: F:通过 Robolectric MMKV shadow 验证旧 bytes、非法 UTF-8 回退与保留值 | R:code:storage-mmkv/src/androidMain/kotlin/com/dgtang/live/data/local/AndroidMmkvStorage.kt | A:AndroidMmkvStorageTest,MmkvShadow | S:shadow 使用内存 Map，不证明设备真实 MMKV 文件升级兼容
+
+===/Users/guoyang/.codex/worktrees/aoci-storage/storage/tests/===
+test_jitpack_install.py[TV8S]: F:验证存储冻结归档的来源绑定、摘要和安全解包拒绝路径 | R:code:jitpack-install.sh | A:JitPackInstallTest | S:覆盖软链目标逃逸、非法 UTF-8、重复字段及收据篡改，失败不安装产物
+
+===/Users/guoyang/.codex/worktrees/aoci-storage/storage/verification-consumer/===
+build.gradle.kts[TV7T]: F:构建只依赖发布坐标的 storage core 与 Android adapter 独立消费者 | R:code:verification-consumer/settings.gradle.kts | A:- | S:不使用源码替换或 MavenLocal；默认固定 1.0.0，公开消费与 staging 消费分别验收
+gradle.properties[FV3T]: F:设置独立消费者 AndroidX 和禁用 Native 目标处理 | R:- | A:- | S:-
+settings.gradle.kts[TV7T]: F:配置独立消费者插件镜像与独占 storage 产物仓 | R:code:verification-consumer/build.gradle.kts | A:- | S:显式候选目录缺失即失败，不回退远端旧制品
+
+===/Users/guoyang/.codex/worktrees/aoci-storage/storage/verification-consumer/src/androidMain/kotlin/===
+AndroidConsumer.kt[TD5T]: F:编译验证发布 adapter 的 Android Context 初始化 API | R:code:storage-mmkv/src/androidMain/kotlin/com/dgtang/live/data/local/AndroidMmkvStorage.kt | A:androidStorage | S:-
+
+===/Users/guoyang/.codex/worktrees/aoci-storage/storage/verification-consumer/src/commonMain/kotlin/===
+Consumer.kt[TD6T]: F:通过公共接口探测类型存储、特殊字符往返与保留值清理 | R:code:storage-core/src/commonMain/kotlin/com/dgtang/live/data/local/TypedKeyValueStore.kt | A:storageContract | S:探针须实际执行才证明行为，编译只证明 API 可消费
+
+===/Users/guoyang/.codex/worktrees/aoci-storage/storage/verification-consumer/src/ohosArm64Main/kotlin/===
+OhosConsumer.kt[TD5T]: F:编译验证发布 core 的 OHOS 同步桥符合 NativeStorageModule | R:code:storage-core/src/ohosArm64Main/kotlin/com/dgtang/live/data/local/OhosNativeStorageModule.kt | A:ohosStorage | S:-
+
+===/Users/guoyang/.codex/worktrees/aoci-storage/storage/verification-ios/===
+Package.swift[TV7T]: F:固定 storage 1.0.0 远程 Swift 包用于独立 GycStorage 消费 | R:code:verification-ios/Sources/StorageConsumer/Consumer.swift | A:StorageConsumer | S:不使用本仓 path 依赖，上游 MMKV 工具链要求独立核验
+
+===/Users/guoyang/.codex/worktrees/aoci-storage/storage/verification-ios/Sources/StorageConsumer/===
+Consumer.swift[TD5T]: F:通过发布 GycStorage 产品创建符合公开协议的原生驱动 | R:code:ios/Sources/GycStorage/GycMmkvStorage.swift | A:storage | S:-
+
+===/Users/guoyang/.codex/worktrees/aoci-storage/storage/verification-ohos/AppScope/===
+app.json5[FV3T]: F:声明 OHOS 独立消费工程的测试包身份与版本 | R:code:verification-ohos/build-profile.json5 | A:- | S:-
+
+===/Users/guoyang/.codex/worktrees/aoci-storage/storage/verification-ohos/===
+build-profile.json5[TV5T]: F:为 OHOS 独立 HAR 消费配置 API22 产品及 StorageConsumer 模块 | R:code:verification-ohos/consumer/build-profile.json5 | A:- | S:-
+hvigorfile.ts[EV4T]: F:给 OHOS 独立消费者绑定官方 appTasks 根构建入口 | R:code:verification-ohos/build-profile.json5 | A:- | S:-
+oh-package.json5[FV3T]: F:声明独立 OHOS 消费根工程的模型与包说明 | R:code:verification-ohos/consumer/oh-package.json5 | A:- | S:-
+storage_bridge.cmake[TV8T]: F:从本次解包的 HAR 目录加入实际桥头文件并启用 C++17 | R:code:ohos/storage-native/src/main/resources/rawfile/native/gyc_storage_bridge.h | A:- | S:包目录未指定或头文件缺失即失败，不能回落到仓库源文件冒充消费
+storage_install.cpp[ID7T]: F:演示宿主以自有安装符号把 NAPI 连接到中立存储桥 | R:code:verification-ohos/storage_bridge.cmake | A:InstallHostStorage | S:host_install_storage_dispatcher 是宿主接线符号，原生组件不依赖该固定名称
+
+===/Users/guoyang/.codex/worktrees/aoci-storage/storage/verification-ohos/consumer/===
+Index.ets[TD6T]: F:通过 OHPM 公开入口创建并初始化原生存储实例 | R:code:verification-ohos/consumer/oh-package.json5 | A:storage | S:目录由调用方传入，包可编译不能代验真实设备数据
+build-profile.json5[FV4T]: F:声明独立 HAR 消费模块使用 stageMode 默认目标 | R:code:verification-ohos/build-profile.json5 | A:- | S:-
+hvigorfile.ts[EV4T]: F:为 OHOS 独立消费者挂接官方 harTasks | R:code:verification-ohos/consumer/build-profile.json5 | A:- | S:-
+oh-package.json5[TV6T]: F:将独立 OHOS 消费者固定到 storage-native 1.0.0 发布依赖 | R:code:verification-ohos/consumer/Index.ets | A:- | S:Registry 认证由宿主提供，不提交凭据
+
+===/Users/guoyang/.codex/worktrees/aoci-storage/storage/verification-ohos/consumer/src/main/===
+module.json5[FV3T]: F:声明 StorageConsumer 为默认设备和平板的 HAR 模块 | R:code:verification-ohos/consumer/build-profile.json5 | A:- | S:-
+
+===/Users/guoyang/.codex/worktrees/aoci-storage/storage/verification-ohos/hvigor/===
+hvigor-config.json5[FV3T]: F:固定独立 OHOS 消费工程的 Hvigor 模型版本 | R:code:verification-ohos/hvigorfile.ts | A:- | S:-
+
+===/Users/guoyang/.codex/worktrees/aoci-storage/storage/verification/===
+LegacyMmkvWriter.mm[TD8T]: F:以原固定 KMP MMKV 二进制写入或回读旧 UTF-8 bytes 升级样本 | R:code:verification/NativeStorageCompatibilityMain.swift | A:main | S:必须显式使用独立 GYC_STORAGE_TEST_ROOT，缺原 Tag 的 MMKVBridge 与 libmmkv-kmp.a 不能声称互读通过
+NativeStorageCompatibilityMain.swift[TD8T]: F:验证原生 Swift adapter 的旧 bytes、失败、作用域与保留值合同 | R:code:ios/Sources/GycStorage/GycMmkvStorage.swift | A:NativeStorageCompatibilityMain.main | S:链接替身只证明 adapter 合同；旧二进制互读须结合真实固定 SDK 原件另验
+native-mmkv-storage.test.cjs[TD8T]: F:转译 ArkTS adapter 并用 MMKV 替身验证旧 bytes、错误与保留值 | R:code:ohos/storage-native/src/main/ets/NativeMmkvStorage.ets | A:- | S:Node 转译不等于 ArkTS/HAR 编译；覆盖未初始化、非法 StoreID、非法 UTF-8 与删除失败
+storage-native-bridge.test.cjs[TD8T]: F:编译真实 C++17 桥并验证主线程、十二路后台及异常后的恢复 | R:code:verification/native/storage_bridge_fixture.cpp | A:- | S:使用当前 Node NAPI 头文件，证明线程分派但不能代验 OHOS 真机
+
+===/Users/guoyang/.codex/worktrees/aoci-storage/storage/verification/ios/===
+MMKV.swift[TD5T]: F:用内存字典替代 Swift MMKV SDK 供轻量 adapter 行为断言 | R:code:verification/ios/run.sh | A:MMKV | S:不持久化文件，不代表真实 SDK 数据兼容
+run.sh[TV6T]: F:编译 MMKV 替身、真实 GycStorage 源码并执行 Swift 合同探针 | R:code:verification/ios/MMKV.swift,code:verification/NativeStorageCompatibilityMain.swift | A:- | S:产物固定隔离在 build/ios-contract，使用替身不能代替官方 MMKV 链接
+
+===/Users/guoyang/.codex/worktrees/aoci-storage/storage/verification/native/===
+storage_bridge_fixture.cpp[TD7T]: F:通过真实 NAPI 暴露主线程和异步后台分派探针 | R:code:ohos/storage-native/src/main/resources/rawfile/native/gyc_storage_bridge.h | A:callMain,callBackground,install | S:回调结果由 fixture free，后台完成经 Promise 回到主线程，不能同步阻塞主线程等待
